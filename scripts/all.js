@@ -165,9 +165,8 @@ define("scripts/collide.js", function(exports) {
       ];
   }
 
-  // 返回线段和椭圆的两个交点，如果不相交，返回 null
   function lineXEllipse(p1, p2, c, r, e) {
-    // 线段：p1, p2    圆心：c    半径：r    离心率：e
+   
     if (r <= 0) return;
     e = e === undefined ? 1 : e;
     var t1 = r,
@@ -212,7 +211,6 @@ define("scripts/collide.js", function(exports) {
     return result;
   }
 
-  // 判断计算线段和椭圆是否相交
   function lineInEllipse(p1, p2, c, r, e) {
     var t = lineXEllipse(p1, p2, c, r, e);
     return t && (t[0] || t[1]);
@@ -221,9 +219,6 @@ define("scripts/collide.js", function(exports) {
   return exports;
 });
 
-/**
- * @source D:\hosting\demos\fruit-ninja\output\scripts\control.js
- */
 
 var mute = false;
 var showWebcam = false;
@@ -458,7 +453,7 @@ define("scripts/game.js", function(exports) {
     gameOver.show();
     // timeline.setTimeout(function(){
     //     // sence.switchSence( "home-menu" );
-    //     // TODO: require 出现互相引用时，造成死循环，这个问题需要跟进，这里暂时用 postMessage 代替
+    //     // TODO: require postMessage
     //     message.postMessage( "home-menu", "sence.switchSence" );
     // }, 2000);
 
@@ -593,8 +588,7 @@ define("scripts/layer.js", function(exports) {
       });
       Ucren.Element("extra").add(layer);
       p = layers[name] = Raphael(layer, 640, 480);
-      // if( Ucren.isSafari )
-      //     p.safari();
+      
       return p;
     }
   };
@@ -605,10 +599,6 @@ define("scripts/layer.js", function(exports) {
 
   return exports;
 });
-
-/**
- * @source D:\hosting\demos\fruit-ninja\output\scripts\main.js
- */
 
 define("scripts/main.js", function(exports) {
   var timeline = require("scripts/timeline");
@@ -709,24 +699,13 @@ define("scripts/main.js", function(exports) {
   return exports;
 });
 
-/**
- * @source D:\hosting\demos\fruit-ninja\output\scripts\message.js
- */
+
 
 define("scripts/message.js", function(exports) {
-  /**
-   * a simple message manager
-   * @author dron
-   * @date 2012-06-27
-   */
+ 
 
   var Ucren = require("scripts/lib/ucren");
 
-  /**
-   * send a message
-   * @param  {Any} message,message...		message contents
-   * @param  {String} to 					message address
-   */
   exports.postMessage = function(message /*, message, message... */, to) {
     var messages = [].slice.call(arguments, 0),
       splitIndex = messages.length - 1;
